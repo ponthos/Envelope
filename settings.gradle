@@ -1,0 +1,1 @@
+include ':app', ':basemodule', ':foldingmodule', ':bannermodule', ':modelmodule', ':mvpmodule'

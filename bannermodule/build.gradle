@@ -1,0 +1,65 @@
+if (rootProject.ext.isApplication) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        if(rootProject.ext.isApplication){
+            applicationId 'com.jiayuan.jr.bannermodule'
+        }else{
+            //
+        }
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        resourcePrefix'bannermodule_'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+        }
+    }
+//    sourceSets{
+//        main{
+//            if(rootProject.ext.isApplication){
+//                manifest.srcFile'src/main/debug/Androidmanifest.xml'
+//            }else{
+//                manifest.srcFile'src/main/release/Androidmanifest.xml'
+//                java{
+//                    exclude{'debug/**'
+//                    }
+//                }
+//            }
+//        }
+//    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation rootProject.ext.dependencies.appcompat_v7
+    implementation rootProject.ext.dependencies["constraint_layout"]
+    implementation rootProject.ext.dependencies.design
+    androidTestImplementation rootProject.ext.dependencies.runner
+    androidTestImplementation rootProject.ext.dependencies.espresso
+    implementation 'com.blankj:utilcode:1.23.6'
+    if(rootProject.ext.isApplication){
+
+    }else{
+//        kapt project(":modulea")
+//        kapt project(":moduleb")
+    }
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+}
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+repositories {
+    mavenCentral()
+}
